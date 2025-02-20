@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useMemo } from "react";
 import { Upload, ChevronRight } from "lucide-react";
 import type { folders, files } from "~/server/db/schema";
 import { Button } from "~/components/ui/button";
@@ -10,6 +9,7 @@ import Link from "next/link";
 export default function DriveContents(props: {
   files: (typeof files.$inferSelect)[];
   folders: (typeof folders.$inferSelect)[];
+  parents: (typeof folders.$inferSelect)[];
 }) {
   const breadcrumbs: unknown[] = [];
 
@@ -22,19 +22,14 @@ export default function DriveContents(props: {
       <div className="mx-auto max-w-6xl">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center">
-            <Link
-              href="/f/1"
-              variant="ghost"
-              className="mr-2 text-gray-300 hover:text-white"
-            >
+            <Link href="/f/1" className="mr-2 text-gray-300 hover:text-white">
               My Drive
             </Link>
-            {breadcrumbs.map((folder, index) => (
+            {props.parents.map((folder, index) => (
               <div key={folder.id} className="flex items-center">
                 <ChevronRight className="mx-2 text-gray-500" size={16} />
                 <Link
                   href={`/f/${folder.id}`}
-                  variant="ghost"
                   className="text-gray-300 hover:text-white"
                 >
                   {folder.name}
