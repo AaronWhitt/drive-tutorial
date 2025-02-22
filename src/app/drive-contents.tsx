@@ -1,15 +1,15 @@
 "use client";
 
 import { Upload, ChevronRight } from "lucide-react";
-import type { folders, files } from "~/server/db/schema";
+import type { folders_table, files_table } from "~/server/db/schema";
 import { Button } from "~/components/ui/button";
 import { FileRow, FolderRow } from "~/components/ui/file-row";
 import Link from "next/link";
 
 export default function DriveContents(props: {
-  files: (typeof files.$inferSelect)[];
-  folders: (typeof folders.$inferSelect)[];
-  parents: (typeof folders.$inferSelect)[];
+  files: (typeof files_table.$inferSelect)[];
+  folders: (typeof folders_table.$inferSelect)[];
+  parents: (typeof folders_table.$inferSelect)[];
 }) {
   const breadcrumbs: unknown[] = [];
 
